@@ -7,6 +7,10 @@
     android:layout_height="match_parent"
     tools:context="org.androidtown.java_app.MainActivity">
 
+    <ListView
+        android:id="@+id/listview1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
 
     <Button
         android:id="@+id/button2"
@@ -20,11 +24,5 @@
         android:onClick="onButton1Clicked"
         android:icon="@drawable/icon_add_button"
         android:text="추가" />
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
