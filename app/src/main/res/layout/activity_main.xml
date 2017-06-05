@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.androidtown.java_app.MainActivity">
-
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onButton1Clicked"
+        android:text="추가" />
+    <Button
+        android:id="@+id/btnDel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="삭제"/>
     <ListView
         android:id="@+id/listview1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="right"
-        android:gravity="bottom"
-        android:onClick="onButton1Clicked"
-        android:icon="@drawable/icon_add_button"
-        android:text="추가" />
+      android:layout_below="@id/button2"></ListView>
 
-</RelativeLayout>
+
+
+</LinearLayout>

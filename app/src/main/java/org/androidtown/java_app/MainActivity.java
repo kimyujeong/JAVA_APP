@@ -8,12 +8,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+import static org.androidtown.java_app.R.id.btnDel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,8 +34,13 @@ public class MainActivity extends AppCompatActivity {
         final ArrayAdapter adapter=new ArrayAdapter(this,android.R.layout.simple_list_item_single_choice,items);//ListView 아이템에 TextView와 Radio Button을 가진 View 표시
         final ListView listview=(ListView) findViewById(R.id.listview1);
         listview.setAdapter(adapter);
+        final ArrayList<String> items2=new ArrayList<String>();
+        final ArrayAdapter adapter2=new ArrayAdapter(this,android.R.layout.list_content,items2);//ListView 아이템에 TextView와 Radio Button을 가진 View 표시
+        final ListView listview2=(ListView) findViewById(R.id.listview2);
+        listview.setAdapter(adapter2);
 
         Button button2=(Button)findViewById(R.id.button2);
+        Button btnDel=(Button)findViewById(R.id.btnDel);
         button2.setOnClickListener(new View.OnClickListener(){ //미리 코딩해놓은 리스너와 연결
 
             @Override
@@ -59,6 +67,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnDel.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        int pos = listview.getCheckedItemPosition();
+                        String str2 = (String) adapterView.getAdapter().getItem(i);
+                        items2.add(pos, str2);
+                        adapter2.notifyDataSetChanged();
+                        items.remove(pos);
+                        adapter.notifyDataSetChanged();
+                        listview.clearChoices();
+                    }
+                });
+            }
+        });
 
     }
 
