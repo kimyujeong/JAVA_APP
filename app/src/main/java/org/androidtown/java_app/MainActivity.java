@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,15 +14,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static android.R.id.list;
 import static org.androidtown.java_app.R.id.btnDel;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText Edthw,Edtdate;
     View Add;
+    View Success;
 
 
     @Override
@@ -31,16 +35,31 @@ public class MainActivity extends AppCompatActivity {
         setTitle("과제알리미");
 
         final ArrayList<String> items=new ArrayList<String>();
-        final ArrayAdapter adapter=new ArrayAdapter(this,android.R.layout.simple_list_item_single_choice,items);//ListView 아이템에 TextView와 Radio Button을 가진 View 표시
+        final ArrayAdapter adapter=new ArrayAdapter(this,android.R.layout.simple_list_item_multiple_choice,items);//ListView 아이템에 TextView와 Radio Button을 가진 View 표시
         final ListView listview=(ListView) findViewById(R.id.listview1);
         listview.setAdapter(adapter);
-        final ArrayList<String> items2=new ArrayList<String>();
-        final ArrayAdapter adapter2=new ArrayAdapter(this,android.R.layout.list_content,items2);//ListView 아이템에 TextView와 Radio Button을 가진 View 표시
+        listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        /*final ArrayList<String> items2=new ArrayList<String>();
+        final ArrayAdapter adapter2=new ArrayAdapter(this,android.R.layout.simple_list_item_single_choice,items2);//ListView 아이템에 TextView와 Radio Button을 가진 View 표시
         final ListView listview2=(ListView) findViewById(R.id.listview2);
-        listview.setAdapter(adapter2);
+        listview.setAdapter(adapter2);*/
+
+        final ArrayList<String> items2=new ArrayList<String>();
+        final ListView listview2=(ListView) findViewById(R.id.listview2);
 
         Button button2=(Button)findViewById(R.id.button2);
         Button btnDel=(Button)findViewById(R.id.btnDel);
+        Button button3=(Button)findViewById(R.id.button3);
+
+        button3.setOnClickListener(new View.OnClickListener(){
+            @Override
+                    public void onClick(View v){
+                Success=(View)View.inflate(MainActivity.this,R.layout.success,null);
+                AlertDialog.Builder success=new AlertDialog.Builder(MainActivity.this);
+            }
+        });
+
+
         button2.setOnClickListener(new View.OnClickListener(){ //미리 코딩해놓은 리스너와 연결
 
             @Override
@@ -66,27 +85,29 @@ public class MainActivity extends AppCompatActivity {
                 add.show();
             }
         });
-
-        btnDel.setOnClickListener(new View.OnClickListener(){
+        /*listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent,View v,int position,long id){
+                String item=items.get(position); //ArrayList에서 position에 해당하는 데이터 얻어오기
+            }
+        });*/
+       btnDel.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v){
-                listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        int pos = listview.getCheckedItemPosition();
-                        String str2 = (String) adapterView.getAdapter().getItem(i);
-                        items2.add(pos, str2);
-                        adapter2.notifyDataSetChanged();
-                        items.remove(pos);
-                        adapter.notifyDataSetChanged();
-                        listview.clearChoices();
+                SparseBooleanArray checkedItems=listview.getCheckedItemPositions();
+                int count=adapter.getCount();
+                for(int i=count-1;i>=0;i--){
+                    if(checkedItems.get(i)){
+                        String item=items.get(i);
+                        items2.add(item);
+                        items.remove(i);
                     }
-                });
+                }
+                listview.clearChoices();
+                adapter.notifyDataSetChanged();
             }
         });
 
     }
-
-
 }
 
