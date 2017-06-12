@@ -2,6 +2,7 @@ package org.androidtown.java_app;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,10 +40,6 @@ public class MainActivity extends AppCompatActivity {
         final ListView listview=(ListView) findViewById(R.id.listview1);
         listview.setAdapter(adapter);
         listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        /*final ArrayList<String> items2=new ArrayList<String>();
-        final ArrayAdapter adapter2=new ArrayAdapter(this,android.R.layout.simple_list_item_single_choice,items2);//ListView 아이템에 TextView와 Radio Button을 가진 View 표시
-        final ListView listview2=(ListView) findViewById(R.id.listview2);
-        listview.setAdapter(adapter2);*/
 
         final ArrayList<String> items2=new ArrayList<String>();
         final ListView listview2=(ListView) findViewById(R.id.listview2);
@@ -54,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener(){
             @Override
                     public void onClick(View v){
-                Success=(View)View.inflate(MainActivity.this,R.layout.success,null);
-                AlertDialog.Builder success=new AlertDialog.Builder(MainActivity.this);
+                Intent intent=new Intent(MainActivity.this,SubActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -85,12 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 add.show();
             }
         });
-        /*listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent,View v,int position,long id){
-                String item=items.get(position); //ArrayList에서 position에 해당하는 데이터 얻어오기
-            }
-        });*/
+
        btnDel.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v){
