@@ -16,48 +16,47 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
-
 import static android.R.id.list;
 import static org.androidtown.java_app.R.id.btnDel;
+import static org.androidtown.java_app.R.layout.success;
+
 
 public class MainActivity extends AppCompatActivity {
 
     EditText Edthw,Edtdate;
     View Add;
     View Success;
-
+    static int c=1;
+    String[] a=new String[100];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("과제알리미");
+        setTitle("과제 Alimi");
 
         final ArrayList<String> items=new ArrayList<String>();
         final ArrayAdapter adapter=new ArrayAdapter(this,android.R.layout.simple_list_item_multiple_choice,items);//ListView 아이템에 TextView와 Radio Button을 가진 View 표시
         final ListView listview=(ListView) findViewById(R.id.listview1);
         listview.setAdapter(adapter);
-        listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
-        final ArrayList<String> items2=new ArrayList<String>();
-        final ListView listview2=(ListView) findViewById(R.id.listview2);
+        final Intent intent=new Intent(MainActivity.this,SubActivity.class);
 
-        Button button2=(Button)findViewById(R.id.button2);
+        Button btnAdd=(Button)findViewById(R.id.btnAdd);
         Button btnDel=(Button)findViewById(R.id.btnDel);
-        Button button3=(Button)findViewById(R.id.button3);
+        Button btnSuc=(Button)findViewById(R.id.btnSuc);
 
-        button3.setOnClickListener(new View.OnClickListener(){
+        btnSuc.setOnClickListener(new View.OnClickListener(){
             @Override
-                    public void onClick(View v){
-                Intent intent=new Intent(MainActivity.this,SubActivity.class);
+            public void onClick(View v){
                 startActivity(intent);
             }
         });
 
 
-        button2.setOnClickListener(new View.OnClickListener(){ //미리 코딩해놓은 리스너와 연결
+        btnAdd.setOnClickListener(new View.OnClickListener(){ //미리 코딩해놓은 리스너와 연결
 
             @Override
             public void onClick(View v){
@@ -83,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
        btnDel.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -91,7 +92,8 @@ public class MainActivity extends AppCompatActivity {
                 for(int i=count-1;i>=0;i--){
                     if(checkedItems.get(i)){
                         String item=items.get(i);
-                        items2.add(item);
+                        a[c++]=item;
+                        intent.putExtra("value",a);
                         items.remove(i);
                     }
                 }
@@ -102,4 +104,3 @@ public class MainActivity extends AppCompatActivity {
 
     }
 }
-

@@ -11,22 +11,28 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnAdd"
         android:layout_width="131dp"
         android:layout_height="wrap_content"
         android:onClick="onButton1Clicked"
-        android:text="추가" />
+        android:text="추가"
+        android:textColor="#FFEBEE"
+        android:background="#E57373"/>
     <Button
         android:id="@+id/btnDel"
         android:layout_width="126dp"
         android:layout_height="wrap_content"
-        android:text="완료"/>
+        android:text="완료"
+        android:textColor="#FFEBEE"
+        android:background="#E57373"/>
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnSuc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="완료한 과제 목록"
-        android:onClick="onButton2Clicked"/>
+        android:onClick="onButton2Clicked"
+        android:textColor="#FFEBEE"
+        android:background="#E57373"/>
 
 </LinearLayout>
 
@@ -34,7 +40,7 @@
         android:id="@+id/listview1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-      android:layout_below="@id/button2"></ListView>
+      android:layout_below="@id/btnAdd"></ListView>
 
 
 
